@@ -75,7 +75,8 @@ function checkLetter(btn){
         if(letters[i].innerHTML === btn){
 
            letters[i].className = "show";
-            correct_letter = letters[i].innerHTML; //text of element 
+            correct_letter = letters[i].innerHTML.toLowerCase(); //text of element 
+            console.log(letters[i].innerHTML);
             console.log(`${correct_letter} is the correct letter`)
 
         }
@@ -102,16 +103,28 @@ qwerty.addEventListener("click" , (e) => {
                let clicked_letter = e.target.textContent;
                console.log(clicked_letter);
               
-               let correct_guess = checkLetter(clicked_letter.toLowerCase()); //what do I put here???
+               let correct_guess = checkLetter(clicked_letter); //what do I put here???
 
 
                if (correct_guess === null){
 
                 missed+=1;
+                let list = document.querySelector("ol");
+                // item.src = "images/lostHeart.png";
+                let heart = document.createElement("img");
+                heart.style.height= "35px";  heart.style.width = "30px";  heart.src= "images/lostHeart.png";
+                 let item = document.createElement("li");
+                item.className = "tries";
+                item.append(heart);
+                list.prepend(item);
+
+                // let last_item = document.querySelector("ol :li");
+                let last_item = list.lastChild
+                console.log(last_item);
+                last_item.remove();
+
 
                }
-
-
 
             }
 
@@ -119,4 +132,13 @@ qwerty.addEventListener("click" , (e) => {
 
 console.log(missed);
 
+check_win();
+
 });
+
+function check_win(){
+
+
+
+
+}
