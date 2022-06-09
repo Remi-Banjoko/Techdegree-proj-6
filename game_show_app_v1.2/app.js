@@ -72,12 +72,11 @@ function checkLetter(btn){
 
     for (let i = 0; i < letters.length; i++){
 
-        if(letters[i].innerHTML === btn){
+        if(letters[i].innerHTML.toLowerCase() === btn){
 
            letters[i].className = "show";
             correct_letter = letters[i].innerHTML.toLowerCase(); //text of element 
-            console.log(letters[i].innerHTML);
-            console.log(`${correct_letter} is the correct letter`)
+        
 
         }
     }
@@ -86,6 +85,41 @@ function checkLetter(btn){
         
     }
 
+    let check_letters = document.querySelectorAll(".letter");
+        console.log(check_letters.length);
+
+    function check_win(){
+
+        
+        
+        let correct_guessess = document.querySelectorAll(".show");
+        console.log(correct_guessess.length);
+    
+        if (check_letters.length === correct_guessess.length){
+    
+            overlay.className = "win";
+            let overlay_headline = document.querySelector("h2");
+            overlay_headline.textContent ="YOU WIN";
+            overlay.style.display = "flex";
+
+
+    
+    
+        } else if(missed>4) {
+
+            overlay.className = "lose";
+            let overlay_headline = document.querySelector("h2");
+            overlay_headline.textContent ="YOU LOSE";
+            overlay.style.display = "flex";
+
+
+
+        }
+    
+    
+    
+    
+    }
 
 
 
@@ -108,20 +142,23 @@ qwerty.addEventListener("click" , (e) => {
 
                if (correct_guess === null){
 
-                missed+=1;
-                let list = document.querySelector("ol");
-                // item.src = "images/lostHeart.png";
-                let heart = document.createElement("img");
-                heart.style.height= "35px";  heart.style.width = "30px";  heart.src= "images/lostHeart.png";
-                 let item = document.createElement("li");
-                item.className = "tries";
-                item.append(heart);
-                list.prepend(item);
 
-                // let last_item = document.querySelector("ol :li");
-                let last_item = list.lastChild
-                console.log(last_item);
-                last_item.remove();
+                const hearts = document.querySelectorAll(".tries img");
+                hearts[missed].src = "images/lostHeart.png";
+                missed+=1;
+                // let list = document.querySelector("ol");
+                // // item.src = "images/lostHeart.png";
+                // let heart = document.createElement("img");
+                // heart.style.height= "35px";  heart.style.width = "30px";  heart.src= "images/lostHeart.png";
+                //  let item = document.createElement("li");
+                // item.className = "tries";
+                // item.append(heart);
+                // list.prepend(item);
+
+                // // let last_item = document.querySelector("ol :li");
+                // let last_item = list.lastChild
+                // console.log(last_item);
+                // last_item.remove();
 
 
                }
@@ -136,9 +173,5 @@ check_win();
 
 });
 
-function check_win(){
 
 
-
-
-}
