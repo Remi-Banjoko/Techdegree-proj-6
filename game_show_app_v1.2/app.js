@@ -6,14 +6,14 @@ let missed = 0;
 
 const phrases = ["My Name Is George" , "It is dangerous to go alone take this", "I used to be an adventurer like you then I took an arrow to the knee" ,
 
-                 "awwwww poop",  "You choose me and I choose you"   ];
+                 "awwwww poop",  "You choose me and I choose you"];
 
 
 let overlay = document.getElementById("overlay");
 start_btn.addEventListener("click", () => {
 
     overlay.style.display = "none";
-
+  
 
 
 });
@@ -60,7 +60,7 @@ function addPhraseToDisplay(arr){
 }
 
 
-const phraseArray = getRandomPhraseAsArray(phrases);
+let phraseArray = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(phraseArray); 
 
 
@@ -74,7 +74,7 @@ function checkLetter(btn){
 
         if(letters[i].innerHTML.toLowerCase() === btn){
 
-           letters[i].className = "show";
+           letters[i].className += " show";
             correct_letter = letters[i].innerHTML.toLowerCase(); //text of element 
         
 
@@ -102,6 +102,39 @@ function checkLetter(btn){
             overlay_headline.textContent ="YOU WIN";
             overlay.style.display = "flex";
 
+            start_btn.addEventListener("click", () => {
+
+                overlay.style.display = "none";
+                missed = 0;
+                for (let i = 0; i < correct_guessess.length; i++){
+                correct_guessess[i].className = "letter";
+                }
+
+                let picked_letters = document.querySelectorAll(".chosen");
+                for (let i = 0; i < picked_letters.length; i++){
+                    picked_letters[i].className = " ";
+                    }
+                    
+                    let phrase_list = document.getElementById("phrase");
+                        phrase_list.innerHTML = "<ul></ul>";
+                    
+                 phraseArray = getRandomPhraseAsArray(phrases);
+                 addPhraseToDisplay(phraseArray); 
+                
+                 const hearts = document.querySelectorAll(".tries img");
+                 for (let i = 0; i < hearts.length; i++){
+                hearts[i].src = "images/liveHeart.png";
+                 }
+
+                 check_letters = document.querySelectorAll(".letter");
+                 console.log(check_letters.length);
+                 correct_guessess = document.querySelectorAll(".show");
+                 console.log(correct_guessess.length);
+
+            
+            });
+
+
 
     
     
@@ -111,6 +144,43 @@ function checkLetter(btn){
             let overlay_headline = document.querySelector("h2");
             overlay_headline.textContent ="YOU LOSE";
             overlay.style.display = "flex";
+
+
+            start_btn.addEventListener("click", () => {
+
+                overlay.style.display = "none";
+                missed = 0;
+                for (let i = 0; i < correct_guessess.length; i++){
+                correct_guessess[i].className = "letter";
+                }
+
+                let picked_letters = document.querySelectorAll(".chosen");
+                for (let i = 0; i < picked_letters.length; i++){
+                    picked_letters[i].className = " ";
+                    }
+                    
+                    let phrase_list = document.getElementById("phrase");
+                        phrase_list.innerHTML = "<ul></ul>";
+                    
+                 phraseArray = getRandomPhraseAsArray(phrases);
+                 addPhraseToDisplay(phraseArray); 
+                
+                 const hearts = document.querySelectorAll(".tries img");
+                 
+                 for (let i = 0; i < hearts.length; i++){
+                hearts[i].src = "images/liveHeart.png";
+                 }
+
+                 check_letters = document.querySelectorAll(".letter");
+                 console.log(check_letters.length);
+
+                 correct_guessess = document.querySelectorAll(".show");
+                 console.log(correct_guessess.length);
+
+            
+            });
+
+            
 
 
 
@@ -172,6 +242,7 @@ console.log(missed);
 check_win();
 
 });
+
 
 
 
